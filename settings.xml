@@ -1,0 +1,87 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!--
+  # Логин и пароль прописать в ~/.mvn/maven.config
+  # Доп опции нужны, чтобы отключить проблемы с SSL соединением внутри
+  -Dmaven.wagon.http.ssl.insecure=true
+  -Dmaven.wagon.http.ssl.allowall=true
+  -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+  -Dsigma.username=логин
+  -Dsigma.password=пароль
+  -->
+
+  <localRepository/>
+  <interactiveMode/>
+  <usePluginRegistry/>
+  <offline/>
+  <pluginGroups/>
+  <servers>
+    <server>
+      <id>internal</id>
+      <username>${sigma.username}</username>
+      <password>${sigma.password}</password>
+      <configuration>
+        <httpConfiguration>
+          <all>
+            <usePreemptive>true</usePreemptive>
+          </all>
+        </httpConfiguration>
+      </configuration>
+    </server>
+    <server>
+      <id>internal2</id>
+      <username>${sigma.username}</username>
+      <password>${sigma.password}</password>
+      <configuration>
+        <httpConfiguration>
+          <all>
+            <usePreemptive>true</usePreemptive>
+          </all>
+        </httpConfiguration>
+      </configuration>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>central</id>
+      <name>Mirror of public repositories</name>
+      <url>https://nexus.sigma.sbrf.ru/nexus/content/groups/public</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+  <proxies/>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <repositories>
+        <repository>
+          <id>internal</id>
+          <name>All internal repositories</name>
+          <url>https://nexus.sigma.sbrf.ru/nexus/content/groups/internal</url>
+          <releases>
+            <updatePolicy>true</updatePolicy>
+          </releases>
+          <snapshots>
+            <updatePolicy>true</updatePolicy>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>internal2</id>
+          <name>Another internal repositories</name>
+          <url>https://sbtnexus.delta.sbrf.ru/nexus/service/local/repositories/central/content</url>
+          <releases>
+            <updatePolicy>true</updatePolicy>
+          </releases>
+          <snapshots>
+            <updatePolicy>true</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>default</activeProfile>
+  </activeProfiles>
+</settings>
